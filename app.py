@@ -1,6 +1,6 @@
 from flask import Flask, request
 import requests
-from functions import *
+from functions import get_requirements, parse_count, get_users, get_mean_from_csv
 
 
 app = Flask(__name__)

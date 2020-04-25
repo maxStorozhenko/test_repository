@@ -3,9 +3,8 @@ from faker import Faker
 
 
 def get_requirements(file_name):
-    file = open(file_name)
-    req = file.read()
-    file.close()
+    with open(file_name) as file:
+        req = file.read()
     req = req.replace('\n', '<br>')
     return req
 
@@ -25,9 +24,8 @@ def get_users(count):
     fake = Faker()
     users = ''
     for i in range(int(count)):
-        users += f'{i + 1}. {fake.name()} {fake.email()}\n'
-    response = users.replace('\n', '<br>')
-    return response
+        users += f'{i + 1}. {fake.name()} {fake.email()}<br>'
+    return users
 
 
 def inches_to_sm(inches):
