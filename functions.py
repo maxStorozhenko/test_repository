@@ -2,14 +2,14 @@ import csv
 from faker import Faker
 
 
-def get_requirements(file_name):
+def get_requirements(file_name: str) -> str:
     with open(file_name) as file:
         req = file.read()
     req = req.replace('\n', '<br>')
     return req
 
 
-def parse_count(count):
+def parse_count(count: str) -> int:
     if not count.isdigit():
         return f'Incorrect parameter count: {count}'
 
@@ -20,19 +20,19 @@ def parse_count(count):
     return count
 
 
-def get_users(count):
+def get_users(count) -> str:
     fake = Faker()
     users = ''
-    for i in range(int(count)):
+    for i in range(count):
         users += f'{i + 1}. {fake.name()} {fake.email()}<br>'
     return users
 
 
-def inches_to_sm(inches):
+def inches_to_sm(inches: float) -> float:
     return round(inches * 2.54, 2)
 
 
-def pounds_to_kg(pounds):
+def pounds_to_kg(pounds: float) -> float:
     return round(pounds * 0.453592, 2)
 
 

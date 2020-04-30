@@ -11,8 +11,9 @@ def run_query(query: str) -> list:
 
 def filter_and(query_param: str) -> str:
     query_params = query_param.split(';')
-    if len(query_params) == 1:
-        return f"{query_params[0].split(':')[0].capitalize()} = '{query_params[0].split(':')[1]}'"
+    result = ''
+    if query_params:
+        for i in query_params:
+            result += f"{i.split(':')[0].capitalize()} = '{i.split(':')[1]}' AND "
 
-    return f"""{query_params[0].split(':')[0].capitalize()} = '{query_params[0].split(':')[1]}' AND 
-                {query_params[1].split(':')[0].capitalize()} = '{query_params[1].split(':')[1]}'"""
+    return result[:-5]

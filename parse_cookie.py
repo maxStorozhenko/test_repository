@@ -1,4 +1,4 @@
-def parse_cookie(query):
+def parse_cookie(query: str) -> dict:
     result = {}
     if not query:
         return result

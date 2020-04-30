@@ -1,4 +1,4 @@
-def parse(query):
+def parse(query: str) -> dict:
     result = {}
     start = query.find('?')
     if start == -1 or query.endswith('?'):
