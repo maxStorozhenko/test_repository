@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-##
 import random
 import string
-
 from students.models import Student
+from faker import Faker
 
 
 def generate_password(length: int = 10) -> str:
@@ -16,7 +14,14 @@ def generate_password(length: int = 10) -> str:
         password += random.choice(choices)
 
     return password
-##
+
+
+def generate_one_student() -> Student:
+    fake = Faker()
+    name, surname = fake.name().split()
+    new_student = Student.objects.create(first_name=name, last_name=surname, age=random.randint(0, 100))
+
+    return new_student
 
 
 def hello_world(request):
@@ -35,3 +40,24 @@ def students(request):
     for student in students_queryset:
         response += student.info() + '<br/>'
     return HttpResponse(response)
+
+
+def generate_student(request) -> HttpResponse:
+    return HttpResponse(f'One new user was created: {generate_one_student().info()}')
+
+
+def generate_students(request) -> HttpResponse:
+    count = request.GET.get('count', '10')
+    if not count.isdigit():
+        return HttpResponse('Incorrect request!')
+
+    count = int(count)
+    if count <= 0 or count > 100:
+        return HttpResponse(f'Incorrect count value: {count}')
+
+    new_users = ''
+    for i in range(count):
+        new_one = generate_one_student()
+        new_users += new_one.info() + '<br/>'
+
+    return HttpResponse(new_users)
