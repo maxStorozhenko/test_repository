@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
     # custom apps
     'students',
-
+    'group',
+    'teachers',
 
 ]
 
