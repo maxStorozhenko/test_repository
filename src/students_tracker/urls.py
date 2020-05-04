@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from students import views
 from group import views as g_views
+
+from students import views
+
 from teachers import views as t_views
 
 urlpatterns = [

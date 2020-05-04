@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 import random
 import string
-from students.models import Student
+
+from django.http import HttpResponse
+from django.shortcuts import render  # noqa  Autoimported by django
+
 from faker import Faker
+
+from students.models import Student
 
 
 def generate_password(length: int = 10) -> str:
