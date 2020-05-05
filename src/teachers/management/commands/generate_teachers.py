@@ -15,16 +15,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         fake = Faker()
+        specifications = ['Python', 'Javascript', 'Java', 'C++']
         count = options.get('number_of_teachers')
         for _ in range(count):
             Teacher.objects.create(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
                 age=randint(25, 100),
-                specification=choice(['Python',
-                                      'Javascript',
-                                      'Java',
-                                      'C++']
-                                     ),
+                specification=choice(specifications),
                 active_groups=randint(1, 5)
             )
