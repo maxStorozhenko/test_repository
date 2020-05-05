@@ -8,7 +8,8 @@ class Group(models.Model):
     length_of_course = models.PositiveSmallIntegerField()
 
     def info(self) -> str:
-        return f'{self.id} {self.teacher} {self.specification} {self.count_of_students} students {self.length_of_course} month'
+        return f'{self.id} {self.teacher} {self.specification} {self.count_of_students} students \
+        {self.length_of_course} month'
 
     def add_student(self) -> None:
         self.count_of_students += 1

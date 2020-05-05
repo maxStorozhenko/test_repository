@@ -1,11 +1,12 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+
+from django.shortcuts import render  # noqa  Autoimported by django
+
 from group.models import Group
 
 
 def show_groups(request) -> HttpResponse:
     groups = Group.objects.all()
-    print(groups)
     response = ''
     for group in groups:
         response += group.info() + '<br/>'
