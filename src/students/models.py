@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Student(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
@@ -17,3 +16,6 @@ class Student(models.Model):
     def inc_age(self) -> None:
         self.age += 1
         self.save()
+
+    def __str__(self):
+        return self.info()
