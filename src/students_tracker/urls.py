@@ -13,8 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from group import views as g_views
 
@@ -30,6 +31,16 @@ urlpatterns = [
     path('generate-student/', views.generate_student),
     path('generate-students/', views.generate_students),
     path('show-groups/', g_views.show_groups),
-    path('show-teachers/', t_views.show_teachers)
+    path('show-teachers/', t_views.show_teachers),
+    path('', views.index),
+    path('create_student/', views.create_student),
+    path('create_teacher/', t_views.create_teacher),
+    path('create_group/', g_views.create_group),
 
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

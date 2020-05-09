@@ -2,9 +2,11 @@ import random
 import string
 
 from django.http import HttpResponse
-from django.shortcuts import render  # noqa  Autoimported by django
+from django.shortcuts import redirect, render
 
 from faker import Faker
+
+from forms import StudentCreateForm
 
 from students.models import Student
 
@@ -64,3 +66,25 @@ def generate_students(request) -> HttpResponse:
         new_users += new_one.info() + '<br/>'
 
     return HttpResponse(new_users)
+
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def create_student(request):
+    if request.method == 'POST':
+        form = StudentCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+
+    elif request.method == 'GET':
+        form = StudentCreateForm()
+
+    context = {
+        'form_name': 'CREATE STUDENT',
+        'create_form': form,
+    }
+
+    return render(request, 'create.html', context=context)
