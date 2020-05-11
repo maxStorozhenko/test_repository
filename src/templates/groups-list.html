@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups</title>
+</head>
+<body>
+
+<a href="{% url 'index' %}"><input type="button" value="Index"/></a><br>
+<a href="{% url 'groups:create' %}"><input type="button" value="Create new group"/></a><br><br>
+Count of groups: {{ count }}<br>
+
+{% for group in groups %}
+    <a href="{% url 'groups:edit' pk=group.id %}">{{ group.id }}</a>
+    {{ group.info }}<br>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDIT STUDENT</title>
+</head>
+<body>
+
+EDIT STUDENT
+<form method="post">
+    {% csrf_token %}
+    {{ edit_form.as_p }}
+    <button type="submit">Submit</button>
+    <a href="{% url 'students:delete' pk=student.id %}"><input type="button" value="Delete"></a>
+</form>
+
+</body>
+</html>

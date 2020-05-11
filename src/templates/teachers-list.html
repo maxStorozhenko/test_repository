@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+</head>
+<body>
+
+<a href="{% url 'index' %}"><input type="button" value="Index"/></a><br>
+<a href="{% url 'teachers:create' %}"><input type="button" value="Create new teacher"/></a><br><br>
+Count of teachers: {{ count }}<br>
+
+{% for teacher in teachers %}
+    <a href="{% url 'teachers:edit' pk=teacher.id %}">{{ teacher.id }}</a>
+    {{ teacher.info }}<br>
+{% endfor %}
+</body>
+</html>

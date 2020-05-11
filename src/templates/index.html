@@ -5,9 +5,10 @@
     <title>Title</title>
 </head>
 
-<a href="/create_student/">Create student</a></br>
-<a href="/create_teacher/">Create teacher</a></br>
-<a href="/create_group/">Create group</a></br>
+<a href="{% url 'students:list' %}">Students</a></br>
+<a href="{% url 'teachers:list' %}">Teachers</a></br>
+<a href="{% url 'groups:list' %}">Groups</a></br>
+
 
 </body>
 </html>

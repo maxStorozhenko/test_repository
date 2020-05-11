@@ -10,5 +10,5 @@ class Teacher(models.Model):
 
     @property
     def info(self) -> str:
-        return f'{self.id}. {self.first_name} {self.last_name} {self.age} {self.specification} ' \
+        return f'{self.first_name} {self.last_name} {self.age} {self.specification} ' \
                f'{self.active_groups} groups'

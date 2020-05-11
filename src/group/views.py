@@ -1,17 +1,15 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 
 from forms import GroupCreateForm
 
 from group.models import Group
 
 
-def show_groups(request) -> HttpResponse:
+def show_groups(request):
     groups = Group.objects.all()
-    response = ''
-    for group in groups:
-        response += group.info() + '<br/>'
-    return HttpResponse(response)
+    count = groups.count()
+    return render(request, 'groups-list.html', context={'groups': groups,
+                                                        'count': count})
 
 
 def create_group(request):
@@ -19,7 +17,7 @@ def create_group(request):
         form = GroupCreateForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/')
+        return redirect(reverse('groups:list'))
     elif request.method == 'GET':
         form = GroupCreateForm()
 
@@ -28,3 +26,27 @@ def create_group(request):
         'create_form': form
     }
     return render(request, 'create.html', context=context)
+
+
+def edit_group(request, pk):
+    group = get_object_or_404(Group, id=pk)
+
+    if request.method == 'POST':
+        form = GroupCreateForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('groups:list'))
+    elif request.method == 'GET':
+        form = GroupCreateForm(instance=group)
+
+    context = {'edit_form': form,
+               'group': group,
+               }
+
+    return render(request, 'edit-group.html', context=context)
+
+
+def delete_group(request, pk):
+    student = Group.objects.filter(id=pk)
+    student.delete()
+    return redirect(reverse('groups:list'))
