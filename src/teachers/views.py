@@ -62,6 +62,6 @@ def edit_teacher(request, pk):
 
 
 def delete_teacher(request, pk):
-    student = Teacher.objects.filter(id=pk)
-    student.delete()
+    teacher = get_object_or_404(Teacher, id=pk)
+    teacher.delete()
     return redirect(reverse('teachers:list'))
