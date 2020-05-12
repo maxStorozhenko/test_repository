@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+
+<a href="{% url 'index' %}"><input type="button" value="Index"/></a><br>
+<a href="{% url 'students:create' %}"><input type="button" value="Create new student"/></a><br>
+<a href="{% url 'students:generate_one' %}"><input type="button" value="Create new random student"/></a><br>
+<a href="{% url 'students:generate_some' count=10%}"><input type="button" value="Create 10 random students"/></a><br>
+<a href="{% url 'students:generate_some' count=100 %}"><input type="button" value="Create 100 random students"/></a><br><br>
+Count of students: {{ count }}<br>
+
+{% for student in students %}
+    <a href="{% url 'students:edit' pk=student.id %}">{{ student.id }}</a>
+    {{ student.full_name }}<br>
+{% endfor %}
+</body>
+</html>

@@ -17,26 +17,16 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
-from group import views as g_views
-
 from students import views
 
-from teachers import views as t_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('hello-world/', views.hello_world),
-    path('students/', views.students),
-    path('generate-student/', views.generate_student),
-    path('generate-students/', views.generate_students),
-    path('show-groups/', g_views.show_groups),
-    path('show-teachers/', t_views.show_teachers),
-    path('', views.index),
-    path('create_student/', views.create_student),
-    path('create_teacher/', t_views.create_teacher),
-    path('create_group/', g_views.create_group),
-
+    path('', views.index, name='index'),
+    path('students/', include('students.urls')),
+    path('teachers/', include('teachers.urls')),
+    path('groups/', include('group.urls')),
 ]
 
 if settings.DEBUG:

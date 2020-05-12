@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 
 from forms import TeacherCreateForm
 
@@ -25,12 +24,9 @@ def show_teachers(request):
         if value:
             teachers = teachers.filter(**{param: value})
 
-    response = f'Count of teachers: {teachers.count()}<br/>'
-
-    for teacher in teachers:
-        response += teacher.info + '<br/>'
-
-    return HttpResponse(response)
+    count = teachers.count()
+    return render(request, 'teachers-list.html', context={'teachers': teachers,
+                                                          'count': count})
 
 
 def create_teacher(request):
@@ -38,10 +34,34 @@ def create_teacher(request):
         form = TeacherCreateForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/')
+        return redirect(reverse('teachers:list'))
     elif request.method == 'GET':
         form = TeacherCreateForm()
 
-    context = {'form_name': 'CREATE_TEACHER',
+    context = {'form_name': 'CREATE TEACHER',
                'create_form': form}
     return render(request, 'create.html', context=context)
+
+
+def edit_teacher(request, pk):
+    teacher = get_object_or_404(Teacher, id=pk)
+
+    if request.method == 'POST':
+        form = TeacherCreateForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('teachers:list'))
+    elif request.method == 'GET':
+        form = TeacherCreateForm(instance=teacher)
+
+    context = {'edit_form': form,
+               'teacher': teacher,
+               }
+
+    return render(request, 'edit-teacher.html', context=context)
+
+
+def delete_teacher(request, pk):
+    teacher = get_object_or_404(Teacher, id=pk)
+    teacher.delete()
+    return redirect(reverse('teachers:list'))

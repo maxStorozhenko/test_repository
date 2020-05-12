@@ -1,3 +1,12 @@
-from django.contrib import admin  # noqa  Autoimported by django
+from django.contrib import admin
 
-# Register your models here.
+from teachers.models import Teacher
+
+
+class TeacherAdmin(admin.ModelAdmin):
+    list_per_page = 19
+    list_display = ('id', 'first_name', 'last_name', 'age', 'specification', 'active_groups')
+    fields = ('first_name', 'last_name', 'age', 'specification', 'active_groups')
+
+
+admin.site.register(Teacher, TeacherAdmin)
