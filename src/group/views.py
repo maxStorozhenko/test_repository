@@ -47,6 +47,6 @@ def edit_group(request, pk):
 
 
 def delete_group(request, pk):
-    student = Group.objects.filter(id=pk)
-    student.delete()
+    group = get_object_or_404(Group, id=pk)
+    group.delete()
     return redirect(reverse('groups:list'))
