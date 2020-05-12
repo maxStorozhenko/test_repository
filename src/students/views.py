@@ -100,6 +100,6 @@ def edit_student(request, pk=id):
 
 
 def delete_student(request, pk):
-    student = Student.objects.filter(id=pk)
+    student = get_object_or_404(Student, id=pk)
     student.delete()
     return redirect(reverse('students:list'))
