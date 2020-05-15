@@ -10,7 +10,18 @@ from teachers.models import Teacher
 class StudentCreateForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name', 'age')
+        fields = ('first_name', 'last_name', 'age', 'phone')
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        cleaned_phone = ''
+        for i in phone:
+            if not i.isdigit():
+                raise forms.ValidationError('You entered not only digits!')
+
+            cleaned_phone += i
+
+        return cleaned_phone
 
 
 class TeacherCreateForm(forms.ModelForm):
