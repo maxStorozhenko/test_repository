@@ -17,8 +17,7 @@ class LogMiddleware:
             diff = (end - start) // 1_000_000
 
             with open('admin_logs.log', 'a') as f:
-                Logger.objects.create(method=request.method, path=request.path, execution_time=diff)
-                log = Logger.objects.last()
+                log = Logger.objects.create(method=request.method, path=request.path, execution_time=diff)
                 f.write(f'{log.path} | {log.method} | {log.execution_time} ms | {log.created}\n')
 
         return response
