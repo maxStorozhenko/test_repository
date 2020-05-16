@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # pip apps
     'debug_toolbar',
     'django_extensions',
+    'silk',
 
     # custom apps
     'students',
@@ -59,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    'middlewares.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'students_tracker.urls'

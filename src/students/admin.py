@@ -5,8 +5,8 @@ from students.models import Student
 
 class StudentAdmin(admin.ModelAdmin):
     list_per_page = 19
-    list_display = ('id', 'first_name', 'last_name', 'age')
-    fields = ('first_name', 'last_name', 'age')
+    list_display = ('id', 'first_name', 'last_name', 'age', 'phone')
+    fields = ('first_name', 'last_name', 'age', 'phone')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
