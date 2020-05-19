@@ -9,7 +9,6 @@ from faker import Faker
 from forms import ContactUsForm, StudentCreateForm
 
 from students.models import Student
-
 from students.tasks import send_mail
 
 
