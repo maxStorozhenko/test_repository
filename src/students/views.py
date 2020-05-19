@@ -6,9 +6,11 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 
 from faker import Faker
 
-from forms import StudentCreateForm
+from forms import ContactUsForm, StudentCreateForm
 
 from students.models import Student
+
+from students.tasks import send_mail
 
 
 def generate_password(length: int = 10) -> str:
@@ -103,3 +105,17 @@ def delete_student(request, pk):
     student = get_object_or_404(Student, id=pk)
     student.delete()
     return redirect(reverse('students:list'))
+
+
+def contact(request):
+    if request.method == 'POST':
+        contact_form = ContactUsForm(request.POST)
+
+        if contact_form.is_valid():
+            send_mail.delay(request.POST)
+            return redirect(reverse('index'))
+
+    elif request.method == 'GET':
+        contact_form = ContactUsForm()
+
+    return render(request, 'contact_form.html', context={'contact_form': contact_form})
