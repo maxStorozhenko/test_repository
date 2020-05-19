@@ -41,9 +41,3 @@ class GroupCreateForm(forms.ModelForm):
                   'specification',
                   'count_of_students',
                   'length_of_course')
-
-
-class ContactUsForm(forms.Form):
-    title = forms.CharField(label='Title', max_length=100)
-    email_from = forms.EmailField(label='Your email', max_length=64)
-    message = forms.CharField(label='Message', max_length=512)
