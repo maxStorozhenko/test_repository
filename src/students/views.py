@@ -9,7 +9,7 @@ from faker import Faker
 from forms import ContactUsForm, StudentCreateForm
 
 from students.models import Student
-from students.tasks import send_mail
+from students.tasks import send_email
 
 
 def generate_password(length: int = 10) -> str:
@@ -111,7 +111,7 @@ def contact(request):
         contact_form = ContactUsForm(request.POST)
 
         if contact_form.is_valid():
-            send_mail.delay(request.POST)
+            send_email.delay(request.POST)
             return redirect(reverse('index'))
 
     elif request.method == 'GET':
