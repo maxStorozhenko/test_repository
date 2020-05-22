@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 teacher=fake.name(),
                 specification=choice(specifications),
                 count_of_students=randint(10, 20),
-                length_of_course=randint(1,12),
+                length_of_course=randint(1, 12),
                 head=Student.objects.order_by('?').last(),
                 curator=Teacher.objects.order_by('?').last()
             ))
