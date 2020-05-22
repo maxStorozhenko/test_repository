@@ -6,7 +6,7 @@ from group.models import Group
 
 
 def show_groups(request):
-    groups = Group.objects.all()
+    groups = Group.objects.all().select_related('head', 'curator')
     count = groups.count()
     return render(request, 'groups-list.html', context={'groups': groups,
                                                         'count': count})
