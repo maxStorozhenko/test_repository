@@ -12,7 +12,7 @@ class Student(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     def info(self) -> str:
-        return f'{self.id} {self.first_name} {self.last_name} {self.age}'
+        return f'{self.id} {self.first_name} {self.last_name}'
 
     def inc_age(self) -> None:
         self.age += 1

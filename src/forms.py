@@ -40,7 +40,9 @@ class GroupCreateForm(forms.ModelForm):
         fields = ('teacher',
                   'specification',
                   'count_of_students',
-                  'length_of_course')
+                  'length_of_course',
+                  'head',
+                  'curator')
 
 
 class ContactUsForm(forms.Form):
